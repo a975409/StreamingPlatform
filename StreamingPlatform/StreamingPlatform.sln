@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamingPlatform.Domain", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamingPlatform.Domain.Contract", "Domain.Contract\StreamingPlatform.Domain.Contract.csproj", "{2892F803-97B1-437B-A029-A6312383A246}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamingPlatform.xUnitTest", "StreamingPlatform.xUnitTest\StreamingPlatform.xUnitTest.csproj", "{BEBCABB3-17FA-4492-AD46-7C04D332ADD8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamingPlatform.Domain.xUnitTest", "StreamingPlatform.xUnitTest\StreamingPlatform.Domain.xUnitTest.csproj", "{BEBCABB3-17FA-4492-AD46-7C04D332ADD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamingPlatform.WebSite.xUnitTest", "StreamingPlatform.WebSite.xUnitTest\StreamingPlatform.WebSite.xUnitTest.csproj", "{567ED5C2-8E1B-448F-A2EF-D270562FE271}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{BEBCABB3-17FA-4492-AD46-7C04D332ADD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEBCABB3-17FA-4492-AD46-7C04D332ADD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEBCABB3-17FA-4492-AD46-7C04D332ADD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{567ED5C2-8E1B-448F-A2EF-D270562FE271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{567ED5C2-8E1B-448F-A2EF-D270562FE271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{567ED5C2-8E1B-448F-A2EF-D270562FE271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{567ED5C2-8E1B-448F-A2EF-D270562FE271}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

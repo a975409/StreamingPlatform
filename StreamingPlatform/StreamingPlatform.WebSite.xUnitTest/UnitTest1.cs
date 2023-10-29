@@ -1,4 +1,4 @@
-namespace StreamingPlatform.xUnitTest
+namespace StreamingPlatform.WebSite.xUnitTest
 {
     public class UnitTest1
     {
