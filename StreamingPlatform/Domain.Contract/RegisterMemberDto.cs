@@ -6,10 +6,19 @@ using System.Threading.Tasks;
 
 namespace StreamingPlatform.Domain.Contract
 {
+    /// <summary>
+    /// 註冊帳號
+    /// </summary>
     public class RegisterMemberDto
     {
+        /// <summary>
+        /// 帳號
+        /// </summary>
         public string AccountNo { get; set; }
 
+        /// <summary>
+        /// 密碼
+        /// </summary>
         public string Pwd { get; set; }
 
         public string Email { get; set; }

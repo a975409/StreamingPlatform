@@ -8,6 +8,11 @@ namespace StreamingPlatform.Domain
         {
         }
 
+        /// <summary>
+        /// 註冊帳號
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public void Register(RegisterMemberDto dto)
         {
             if (string.IsNullOrEmpty(dto.AccountNo))

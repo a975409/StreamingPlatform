@@ -13,6 +13,11 @@ namespace StreamingPlatform.Domain
             _context = context;
         }
 
+        /// <summary>
+        /// 取得歌手列表
+        /// </summary>
+        /// <param name="singerName"></param>
+        /// <returns></returns>
         public IEnumerable<SingerSearchDto> GetSingerList(string singerName)
         {
             var result = _context.Singer.AsNoTracking().Select(m => m);

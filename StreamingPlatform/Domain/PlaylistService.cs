@@ -18,6 +18,15 @@ namespace StreamingPlatform.Domain
             _context = context;
         }
 
+        /// <summary>
+        /// 建立播放清單
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="songIds"></param>
+        /// <param name="memberId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public bool CreatePlaylist(string name, int[] songIds, int memberId)
         {
             var member = _context.Member
@@ -54,6 +63,11 @@ namespace StreamingPlatform.Domain
             return _context.SaveChanges() > 0;
         }
 
+        /// <summary>
+        /// 刪除播放清單
+        /// </summary>
+        /// <param name="playlistId"></param>
+        /// <returns></returns>
         public bool DeletePlaylist(int playlistId)
         {
             var playlist = _context.PlayList
@@ -67,6 +81,15 @@ namespace StreamingPlatform.Domain
             return _context.SaveChanges() > 0;
         }
 
+        /// <summary>
+        /// 編輯播放清單
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="songIds"></param>
+        /// <param name="playlistId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public bool EditPlaylist(string name, int[] songIds, int playlistId)
         {
             var playlist = _context.PlayList
@@ -125,6 +148,12 @@ namespace StreamingPlatform.Domain
             return saveCount > 0 && playlist.PlaylistItem.Count == songIds.Length && playlist.Name == name;
         }
 
+        /// <summary>
+        /// 取得播放清單列表
+        /// </summary>
+        /// <param name="membarId"></param>
+        /// <param name="playlistName"></param>
+        /// <returns></returns>
         public IEnumerable<PlaylistSearchDto> SearchPlaylist(int membarId, string playlistName)
         {
             var result = _context.PlayList.Where(m => m.MemberId == membarId);

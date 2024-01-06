@@ -13,6 +13,12 @@ namespace StreamingPlatform.Domain
             _context = context;
         }
 
+        /// <summary>
+        /// 取得歌曲列表
+        /// </summary>
+        /// <param name="albumName"></param>
+        /// <param name="songName"></param>
+        /// <returns></returns>
         public IEnumerable<SongSearchDto> GetSongList(string albumName, string songName)
         {
             var result = from s in _context.Song

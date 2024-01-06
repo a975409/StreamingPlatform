@@ -13,6 +13,11 @@ namespace StreamingPlatform.Domain
             _context = context;
         }
 
+        /// <summary>
+        /// 取得專輯列表
+        /// </summary>
+        /// <param name="albumName"></param>
+        /// <returns></returns>
         public IEnumerable<AlbumSearchDto> GetAlbumList(string albumName)
         {
             var result = _context.Album.AsNoTracking().Select(m => m);
