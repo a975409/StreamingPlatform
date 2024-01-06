@@ -19,7 +19,7 @@ namespace StreamingPlatform.xUnitTest
         {
             string albumName = "";
             AlbumService service = new AlbumService(_context);
-            IEnumerable<AlbumSearchResult> albumResults = service.GetAlbumList(albumName);
+            IEnumerable<AlbumSearchDto> albumResults = service.GetAlbumList(albumName);
 
             Assert.True(albumResults.Any());
         }
@@ -29,7 +29,7 @@ namespace StreamingPlatform.xUnitTest
         {
             string albumName = "eternal city";
             AlbumService service = new AlbumService(_context);
-            IEnumerable<AlbumSearchResult> albumResults = service.GetAlbumList(albumName);
+            IEnumerable<AlbumSearchDto> albumResults = service.GetAlbumList(albumName);
 
             Assert.True(albumResults.Any());
         }
@@ -39,7 +39,7 @@ namespace StreamingPlatform.xUnitTest
         {
             string albumName = "asfafs";
             AlbumService service = new AlbumService(_context);
-            IEnumerable<AlbumSearchResult> albumResults = service.GetAlbumList(albumName);
+            IEnumerable<AlbumSearchDto> albumResults = service.GetAlbumList(albumName);
 
             Assert.True(albumResults.Any() == false);
         }
@@ -51,7 +51,7 @@ namespace StreamingPlatform.xUnitTest
             string songName = "";
 
             SongService service = new SongService(_context);
-            IEnumerable<SongSearchResult> songResults = service.GetSongList(albumName: albumName, songName);
+            IEnumerable<SongSearchDto> songResults = service.GetSongList(albumName: albumName, songName);
 
             Assert.True(songResults.Any());
         }
@@ -63,7 +63,7 @@ namespace StreamingPlatform.xUnitTest
             string songName = "inhuman empathy";
 
             SongService service = new SongService(_context);
-            IEnumerable<SongSearchResult> songResults = service.GetSongList(albumName: albumName, songName);
+            IEnumerable<SongSearchDto> songResults = service.GetSongList(albumName: albumName, songName);
 
             Assert.True(songResults.Any());
         }
@@ -75,7 +75,7 @@ namespace StreamingPlatform.xUnitTest
             string songName = "";
 
             SongService service = new SongService(_context);
-            IEnumerable<SongSearchResult> songResults = service.GetSongList(albumName: albumName, songName);
+            IEnumerable<SongSearchDto> songResults = service.GetSongList(albumName: albumName, songName);
 
             Assert.True(songResults.Any());
         }
@@ -87,7 +87,7 @@ namespace StreamingPlatform.xUnitTest
             string songName = "inhuman empathy";
 
             SongService service = new SongService(_context);
-            IEnumerable<SongSearchResult> songResults = service.GetSongList(albumName: albumName, songName);
+            IEnumerable<SongSearchDto> songResults = service.GetSongList(albumName: albumName, songName);
 
             Assert.True(songResults.Any());
         }
@@ -99,7 +99,7 @@ namespace StreamingPlatform.xUnitTest
             string songName = "safsaa";
 
             SongService service = new SongService(_context);
-            IEnumerable<SongSearchResult> songResults = service.GetSongList(albumName: albumName, songName);
+            IEnumerable<SongSearchDto> songResults = service.GetSongList(albumName: albumName, songName);
 
             Assert.True(songResults.Any() == false);
         }
@@ -110,7 +110,7 @@ namespace StreamingPlatform.xUnitTest
             string singerName = "";
 
             SingerService service = new SingerService(_context);
-            IEnumerable<SingerSearchResult> singerResults = service.GetSingerList(singerName);
+            IEnumerable<SingerSearchDto> singerResults = service.GetSingerList(singerName);
 
             Assert.True(singerResults.Any());
         }
@@ -121,7 +121,7 @@ namespace StreamingPlatform.xUnitTest
             string singerName = "amazarashi";
 
             SingerService service = new SingerService(_context);
-            IEnumerable<SingerSearchResult> singerResults = service.GetSingerList(singerName);
+            IEnumerable<SingerSearchDto> singerResults = service.GetSingerList(singerName);
 
             Assert.True(singerResults.Any());
         }
@@ -132,7 +132,7 @@ namespace StreamingPlatform.xUnitTest
             string singerName = "gasagasg";
 
             SingerService service = new SingerService(_context);
-            IEnumerable<SingerSearchResult> singerResults = service.GetSingerList(singerName);
+            IEnumerable<SingerSearchDto> singerResults = service.GetSingerList(singerName);
 
             Assert.True(singerResults.Any() == false);
         }

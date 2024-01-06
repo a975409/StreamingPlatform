@@ -13,14 +13,14 @@ namespace StreamingPlatform.Domain
             _context = context;
         }
 
-        public IEnumerable<SingerSearchResult> GetSingerList(string singerName)
+        public IEnumerable<SingerSearchDto> GetSingerList(string singerName)
         {
             var result = _context.Singer.AsNoTracking().Select(m => m);
 
             if (!string.IsNullOrEmpty(singerName))
                 result = result.Where(m => m.Name.Contains(singerName));
 
-            return result.Select(m => new SingerSearchResult
+            return result.Select(m => new SingerSearchDto
             {
                 Id = m.Id,
                 Name = m.Name

@@ -13,7 +13,7 @@ namespace StreamingPlatform.Domain
             _context = context;
         }
 
-        public IEnumerable<SongSearchResult> GetSongList(string albumName, string songName)
+        public IEnumerable<SongSearchDto> GetSongList(string albumName, string songName)
         {
             var result = from s in _context.Song
                          join p in _context.SingerAndSongRelation on s.Id equals p.SongId into ps
@@ -28,7 +28,7 @@ namespace StreamingPlatform.Domain
             if (!string.IsNullOrEmpty(songName))
                 result = result.Where(m => m.s.Name.Contains(songName));
 
-            List<SongSearchResult> songSearchResults = new List<SongSearchResult>();
+            List<SongSearchDto> songSearchResults = new List<SongSearchDto>();
 
             foreach (var item in result)
             {
@@ -37,14 +37,14 @@ namespace StreamingPlatform.Domain
                 if (searchResult != null)
                 {
                     if (!string.IsNullOrEmpty(item.a.AlbumName))
-                        searchResult.AlbumSearchResults.Add(new AlbumSearchResult
+                        searchResult.AlbumSearchResults.Add(new AlbumSearchDto
                         {
                             Id = item.a.AlbumId,
                             Name = item.a.AlbumName
                         });
 
                     if (!string.IsNullOrEmpty(item.p.SingerName))
-                        searchResult.SingerSearchResults.Add(new SingerSearchResult
+                        searchResult.SingerSearchResults.Add(new SingerSearchDto
                         {
                             Id = item.p.SingerId,
                             Name = item.p.SingerName
@@ -52,15 +52,15 @@ namespace StreamingPlatform.Domain
                 }
                 else
                 {
-                    songSearchResults.Add(new SongSearchResult
+                    songSearchResults.Add(new SongSearchDto
                     {
                         Id = item.s.Id,
                         Name = item.s.Name,
-                        AlbumSearchResults = new List<AlbumSearchResult> { new AlbumSearchResult {
+                        AlbumSearchResults = new List<AlbumSearchDto> { new AlbumSearchDto {
                      Id= item.a.AlbumId,
                       Name=item.a.AlbumName
                     } },
-                        SingerSearchResults = new List<SingerSearchResult> { new SingerSearchResult {
+                        SingerSearchResults = new List<SingerSearchDto> { new SingerSearchDto {
                       Name=item.p.SingerName,
                        Id=item.p.SingerId
                      } }

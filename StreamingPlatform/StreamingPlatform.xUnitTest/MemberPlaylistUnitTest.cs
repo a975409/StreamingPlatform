@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StreamingPlatform.xUnitTest
 {
-    public class MemberUnitTest
+    public class MemberPlaylistUnitTest
     {
         private readonly StreamingPlatformContextFake _context = new StreamingPlatformContextFakeBuilder()
                                                                 .WithAlbum()
@@ -150,6 +150,39 @@ namespace StreamingPlatform.xUnitTest
             var service = new PlaylistService(_context);
 
             Assert.True(service.DeletePlaylist(playlistId));
+        }
+
+        [Fact]
+        public void GetPlaylist_ConditionsNotMet_RetuenNoData()
+        {
+            string playlistName = "Nodata";
+            int membarId = -1;
+
+            var service = new PlaylistService(_context);
+
+            Assert.True(service.SearchPlaylist(membarId, playlistName).Any() == false);
+        }
+
+        [Fact]
+        public void GetPlaylist_ConditionsMet_RetuenData()
+        {
+            string playlistName = "最愛歌單";
+            int membarId = 1;
+
+            var service = new PlaylistService(_context);
+
+            Assert.True(service.SearchPlaylist(membarId, playlistName).Any());
+        }
+
+        [Fact]
+        public void GetPlaylist_PlaylistNameIsEmpty_RetuenData()
+        {
+            string playlistName = "";
+            int membarId = 1;
+
+            var service = new PlaylistService(_context);
+
+            Assert.True(service.SearchPlaylist(membarId, playlistName).Any());
         }
     }
 }

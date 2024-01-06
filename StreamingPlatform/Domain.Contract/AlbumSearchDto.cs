@@ -1,6 +1,6 @@
 ﻿namespace StreamingPlatform.Domain.Contract
 {
-    public class AlbumSearchResult
+    public class AlbumSearchDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

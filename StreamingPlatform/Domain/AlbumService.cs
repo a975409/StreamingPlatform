@@ -13,14 +13,14 @@ namespace StreamingPlatform.Domain
             _context = context;
         }
 
-        public IEnumerable<AlbumSearchResult> GetAlbumList(string albumName)
+        public IEnumerable<AlbumSearchDto> GetAlbumList(string albumName)
         {
             var result = _context.Album.AsNoTracking().Select(m => m);
 
             if (!string.IsNullOrEmpty(albumName))
                 result = result.Where(m => m.Name.Contains(albumName));
 
-            return result.Select(m => new AlbumSearchResult
+            return result.Select(m => new AlbumSearchDto
             {
                 Id = m.Id,
                 Name = m.Name

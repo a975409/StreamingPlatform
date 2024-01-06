@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Identity.Client;
+using StreamingPlatform.Domain.Contract;
 using StreamingPlatform.Domain.Models;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
@@ -122,6 +123,21 @@ namespace StreamingPlatform.Domain
             int saveCount = _context.SaveChanges();
 
             return saveCount > 0 && playlist.PlaylistItem.Count == songIds.Length && playlist.Name == name;
+        }
+
+        public IEnumerable<PlaylistSearchDto> SearchPlaylist(int membarId, string playlistName)
+        {
+            var result = _context.PlayList.Where(m => m.MemberId == membarId);
+
+            if (!string.IsNullOrEmpty(playlistName))
+                result = result.Where(m => m.Name.Contains(playlistName));
+
+            return result.Select(m => new PlaylistSearchDto
+            {
+                Id = m.Id,
+                Name = m.Name,
+                MemberId = m.MemberId
+            });
         }
     }
 }
