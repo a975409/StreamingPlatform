@@ -34,6 +34,8 @@ namespace StreamingPlatform.Domain
             if (!string.IsNullOrEmpty(songName))
                 result = result.Where(m => m.s.Name.Contains(songName));
 
+            result = result.AsNoTracking();
+
             List<SongSearchDto> songSearchResults = new List<SongSearchDto>();
 
             foreach (var item in result)
@@ -75,6 +77,95 @@ namespace StreamingPlatform.Domain
             }
 
             return songSearchResults;
+        }
+
+        public void SongUpload(SongUploadDto dto)
+        {
+            var singerResult = _context.Singer.AsNoTracking().FirstOrDefault(m => m.Id == dto.SingerId);
+
+            if (singerResult == null)
+                throw new ArgumentNullException(nameof(dto.SingerId), "此歌手不存在");
+
+            if (string.IsNullOrEmpty(dto.Name))
+                throw new ArgumentNullException(nameof(dto.Name),"必須填寫歌曲名稱");
+
+            var newSong = new Song
+            {
+                Name = dto.Name,
+            };
+
+            _context.Song.Add(newSong);
+
+            Album? album = null;
+
+            if (dto.albumId != null)
+            {
+                album = _context.Album.AsNoTracking().FirstOrDefault(m => m.Id == dto.albumId);
+
+                if (album == null)
+                    throw new ArgumentOutOfRangeException(nameof(dto.albumId), "指定的專輯不存在");
+            }
+            else if(dto.albumId == null && !string.IsNullOrEmpty(dto.AlbumName))
+            {
+                album = new Album
+                {
+                    Name = dto.AlbumName
+                };
+
+                _context.Album.Add(album);
+            }
+
+            using (var trna = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    _context.SaveChanges();
+
+                    if (album != null)
+                    {
+                        _context.SongAndAlbumRelation.Add(new SongAndAlbumRelation
+                        {
+                            AlbumId = album.Id,
+                            SongId = newSong.Id,
+                            AlbumName = album.Name
+                        });
+                    }
+
+                    _context.SingerAndSongRelation.Add(new SingerAndSongRelation
+                    {
+                        SingerId = singerResult.Id,
+                        SongId = newSong.Id,
+                        SingerName = singerResult.DisplayName
+                    });
+
+                    _context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    trna.Rollback();
+                    throw;
+                }
+            }
+        }
+
+        public void SongRemove(int songId)
+        {
+            var songReuslt = _context.Song.FirstOrDefault(m => m.Id == songId);
+
+            if (songReuslt != null)
+                _context.Song.Remove(songReuslt);
+
+            var songAndAlbumRelationList = _context.SongAndAlbumRelation.Where(m => m.SongId == songId).ToList();
+
+            if (songAndAlbumRelationList.Any())
+                _context.SongAndAlbumRelation.RemoveRange(songAndAlbumRelationList);
+
+            var singerAndSongRelationList = _context.SingerAndSongRelation.Where(m => m.SongId == songId).ToList();
+
+            if (singerAndSongRelationList.Any())
+                _context.SingerAndSongRelation.RemoveRange(singerAndSongRelationList);
+
+            _context.SaveChanges();
         }
     }
 }

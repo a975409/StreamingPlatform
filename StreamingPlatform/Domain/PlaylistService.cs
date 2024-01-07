@@ -161,7 +161,7 @@ namespace StreamingPlatform.Domain
             if (!string.IsNullOrEmpty(playlistName))
                 result = result.Where(m => m.Name.Contains(playlistName));
 
-            return result.Select(m => new PlaylistSearchDto
+            return result.AsNoTracking().Select(m => new PlaylistSearchDto
             {
                 Id = m.Id,
                 Name = m.Name,

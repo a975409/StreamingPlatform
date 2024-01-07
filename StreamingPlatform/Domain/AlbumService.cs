@@ -25,7 +25,7 @@ namespace StreamingPlatform.Domain
             if (!string.IsNullOrEmpty(albumName))
                 result = result.Where(m => m.Name.Contains(albumName));
 
-            return result.Select(m => new AlbumSearchDto
+            return result.AsNoTracking().Select(m => new AlbumSearchDto
             {
                 Id = m.Id,
                 Name = m.Name
