@@ -3,23 +3,26 @@
 using System;
 using System.Collections.Generic;
 
-namespace StreamingPlatform.Domain.Models;
-
-public partial class Member
+namespace StreamingPlatform.Domain.Models
 {
-    public int Id { get; set; }
+    public partial class Member
+    {
+        public Member()
+        {
+            PlayList = new HashSet<PlayList>();
+        }
 
-    public string AccountNo { get; set; }
+        public int Id { get; set; }
+        public string AccountNo { get; set; }
+        public string Pwd { get; set; }
+        public string Email { get; set; }
+        public string Name { get; set; }
+        public string DisplayName { get; set; }
+        public bool GoogleOta { get; set; }
+        public bool EmailIsVerificationPassed { get; set; }
+        public decimal CtimeUnixTime { get; set; }
+        public decimal MtimeUnixTime { get; set; }
 
-    public string Pwd { get; set; }
-
-    public string Email { get; set; }
-
-    public string Name { get; set; }
-
-    public string DisplayName { get; set; }
-
-    public bool GoogleOta { get; set; }
-
-    public virtual ICollection<PlayList> PlayList { get; set; } = new List<PlayList>();
+        public virtual ICollection<PlayList> PlayList { get; set; }
+    }
 }

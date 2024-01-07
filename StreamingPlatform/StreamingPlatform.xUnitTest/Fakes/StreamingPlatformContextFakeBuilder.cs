@@ -24,8 +24,8 @@ namespace StreamingPlatform.xUnitTest.Fakes
         {
             _context.Member.Add(new Member
             {
-                AccountNo = "a975409",
-                Pwd = "a975409",
+                AccountNo = "aA975409",
+                Pwd = "aA975409",
                 DisplayName = "a975409",
                 Email = "a975409@gmail.com",
                 GoogleOta = false,
@@ -66,7 +66,7 @@ namespace StreamingPlatform.xUnitTest.Fakes
             {
                 Id = 1,
                 Name = "amazarashi",
-                AccountNo = "amazarashi",
+                AccountNo = "A5516amazarashia",
                 DisplayName = "amazarashi",
                 Email = "amazarashi@gmail.com",
                 GoogleOta = false,

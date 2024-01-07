@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain.Contract\StreamingPlatform.Domain.Contract.csproj" />
+    <ProjectReference Include="..\StreamingPlatform.Framework\StreamingPlatform.Framework.csproj" />
   </ItemGroup>
 
   <ItemGroup>

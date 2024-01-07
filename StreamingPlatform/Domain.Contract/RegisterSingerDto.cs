@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace StreamingPlatform.Domain.Contract
 {
-    /// <summary>
-    /// 會員註冊
-    /// </summary>
-    public class RegisterMemberDto
+    public class RegisterSingerDto
     {
         /// <summary>
         /// 帳號

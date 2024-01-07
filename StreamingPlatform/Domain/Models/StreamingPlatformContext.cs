@@ -3,171 +3,216 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace StreamingPlatform.Domain.Models;
-
-public partial class StreamingPlatformContext : DbContext
+namespace StreamingPlatform.Domain.Models
 {
-    public StreamingPlatformContext(DbContextOptions<StreamingPlatformContext> options)
-        : base(options)
+    public partial class StreamingPlatformContext : DbContext
     {
+        public StreamingPlatformContext()
+        {
+        }
+
+        public StreamingPlatformContext(DbContextOptions<StreamingPlatformContext> options)
+            : base(options)
+        {
+        }
+
+        public virtual DbSet<Album> Album { get; set; }
+        public virtual DbSet<Member> Member { get; set; }
+        public virtual DbSet<PlayList> PlayList { get; set; }
+        public virtual DbSet<PlaylistItem> PlaylistItem { get; set; }
+        public virtual DbSet<Singer> Singer { get; set; }
+        public virtual DbSet<SingerAndSongRelation> SingerAndSongRelation { get; set; }
+        public virtual DbSet<Song> Song { get; set; }
+        public virtual DbSet<SongAndAlbumRelation> SongAndAlbumRelation { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Album>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("name");
+
+                entity.Property(e => e.Note)
+                    .HasMaxLength(50)
+                    .HasColumnName("note");
+            });
+
+            modelBuilder.Entity<Member>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.AccountNo)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("accountNo");
+
+                entity.Property(e => e.CtimeUnixTime)
+                    .HasColumnType("decimal(20, 0)")
+                    .HasColumnName("ctimeUnixTime");
+
+                entity.Property(e => e.DisplayName)
+                    .HasMaxLength(50)
+                    .HasColumnName("displayName");
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("email");
+
+                entity.Property(e => e.EmailIsVerificationPassed).HasColumnName("emailIsVerificationPassed");
+
+                entity.Property(e => e.GoogleOta).HasColumnName("googleOTA");
+
+                entity.Property(e => e.MtimeUnixTime)
+                    .HasColumnType("decimal(20, 0)")
+                    .HasColumnName("mtimeUnixTime");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("name");
+
+                entity.Property(e => e.Pwd)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("pwd");
+            });
+
+            modelBuilder.Entity<PlayList>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.MemberId).HasColumnName("memberId");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("name");
+
+                entity.HasOne(d => d.Member)
+                    .WithMany(p => p.PlayList)
+                    .HasForeignKey(d => d.MemberId)
+                    .HasConstraintName("FK_PlayList_Member");
+            });
+
+            modelBuilder.Entity<PlaylistItem>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.PlaylistId).HasColumnName("playlistId");
+
+                entity.Property(e => e.SongId).HasColumnName("songId");
+
+                entity.HasOne(d => d.Playlist)
+                    .WithMany(p => p.PlaylistItem)
+                    .HasForeignKey(d => d.PlaylistId)
+                    .HasConstraintName("FK_PlaylistItem_Playlist");
+            });
+
+            modelBuilder.Entity<Singer>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
+
+                entity.Property(e => e.AccountNo)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("accountNo");
+
+                entity.Property(e => e.CtimeUnixTime)
+                    .HasColumnType("decimal(20, 0)")
+                    .HasColumnName("ctimeUnixTime");
+
+                entity.Property(e => e.DisplayName)
+                    .HasMaxLength(50)
+                    .HasColumnName("displayName");
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("email");
+
+                entity.Property(e => e.EmailIsVerificationPassed).HasColumnName("emailIsVerificationPassed");
+
+                entity.Property(e => e.GoogleOta).HasColumnName("googleOTA");
+
+                entity.Property(e => e.MtimeUnixTime)
+                    .HasColumnType("decimal(20, 0)")
+                    .HasColumnName("mtimeUnixTime");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("name");
+
+                entity.Property(e => e.Pwd)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("pwd");
+            });
+
+            modelBuilder.Entity<SingerAndSongRelation>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.SingerId).HasColumnName("singerId");
+
+                entity.Property(e => e.SingerName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("singerName");
+
+                entity.Property(e => e.SongId).HasColumnName("songId");
+            });
+
+            modelBuilder.Entity<Song>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("name");
+
+                entity.Property(e => e.Note)
+                    .HasMaxLength(50)
+                    .HasColumnName("note");
+            });
+
+            modelBuilder.Entity<SongAndAlbumRelation>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
+
+                entity.Property(e => e.AlbumId).HasColumnName("albumId");
+
+                entity.Property(e => e.AlbumName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("albumName");
+
+                entity.Property(e => e.SongId)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("songId");
+            });
+
+            OnModelCreatingPartial(modelBuilder);
+        }
+
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
-
-    public virtual DbSet<Album> Album { get; set; }
-
-    public virtual DbSet<Member> Member { get; set; }
-
-    public virtual DbSet<PlayList> PlayList { get; set; }
-
-    public virtual DbSet<PlaylistItem> PlaylistItem { get; set; }
-
-    public virtual DbSet<Singer> Singer { get; set; }
-
-    public virtual DbSet<SingerAndSongRelation> SingerAndSongRelation { get; set; }
-
-    public virtual DbSet<Song> Song { get; set; }
-
-    public virtual DbSet<SongAndAlbumRelation> SongAndAlbumRelation { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Album>(entity =>
-        {
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Name)
-                .IsRequired()
-                .HasMaxLength(50)
-                .HasColumnName("name");
-            entity.Property(e => e.Note)
-                .HasMaxLength(50)
-                .HasColumnName("note");
-        });
-
-        modelBuilder.Entity<Member>(entity =>
-        {
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.AccountNo)
-                .IsRequired()
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("accountNo");
-            entity.Property(e => e.DisplayName)
-                .HasMaxLength(50)
-                .HasColumnName("displayName");
-            entity.Property(e => e.Email)
-                .IsRequired()
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("email");
-            entity.Property(e => e.GoogleOta).HasColumnName("googleOTA");
-            entity.Property(e => e.Name)
-                .IsRequired()
-                .HasMaxLength(50)
-                .HasColumnName("name");
-            entity.Property(e => e.Pwd)
-                .IsRequired()
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("pwd");
-        });
-
-        modelBuilder.Entity<PlayList>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK_PlayList_1");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.MemberId).HasColumnName("memberId");
-            entity.Property(e => e.Name)
-                .IsRequired()
-                .HasMaxLength(50)
-                .HasColumnName("name");
-
-            entity.HasOne(d => d.Member).WithMany(p => p.PlayList)
-                .HasForeignKey(d => d.MemberId)
-                .HasConstraintName("FK_PlayList_Member");
-        });
-
-        modelBuilder.Entity<PlaylistItem>(entity =>
-        {
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.PlaylistId).HasColumnName("playlistId");
-            entity.Property(e => e.SongId).HasColumnName("songId");
-
-            entity.HasOne(d => d.Playlist).WithMany(p => p.PlaylistItem)
-                .HasForeignKey(d => d.PlaylistId)
-                .HasConstraintName("FK_PlaylistItem_Playlist");
-        });
-
-        modelBuilder.Entity<Singer>(entity =>
-        {
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
-            entity.Property(e => e.AccountNo)
-                .IsRequired()
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("accountNo");
-            entity.Property(e => e.DisplayName)
-                .HasMaxLength(50)
-                .HasColumnName("displayName");
-            entity.Property(e => e.Email)
-                .IsRequired()
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("email");
-            entity.Property(e => e.GoogleOta).HasColumnName("googleOTA");
-            entity.Property(e => e.Name)
-                .IsRequired()
-                .HasMaxLength(50)
-                .HasColumnName("name");
-            entity.Property(e => e.Pwd)
-                .IsRequired()
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("pwd");
-        });
-
-        modelBuilder.Entity<SingerAndSongRelation>(entity =>
-        {
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.SingerId).HasColumnName("singerId");
-            entity.Property(e => e.SingerName)
-                .IsRequired()
-                .HasMaxLength(50)
-                .HasColumnName("singerName");
-            entity.Property(e => e.SongId).HasColumnName("songId");
-        });
-
-        modelBuilder.Entity<Song>(entity =>
-        {
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Name)
-                .IsRequired()
-                .HasMaxLength(50)
-                .HasColumnName("name");
-            entity.Property(e => e.Note)
-                .HasMaxLength(50)
-                .HasColumnName("note");
-        });
-
-        modelBuilder.Entity<SongAndAlbumRelation>(entity =>
-        {
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
-            entity.Property(e => e.AlbumId).HasColumnName("albumId");
-            entity.Property(e => e.AlbumName)
-                .IsRequired()
-                .HasMaxLength(50)
-                .HasColumnName("albumName");
-            entity.Property(e => e.SongId)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("songId");
-        });
-
-        OnModelCreatingPartial(modelBuilder);
-    }
-
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

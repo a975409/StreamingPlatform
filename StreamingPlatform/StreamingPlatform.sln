@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamingPlatform.WebSite", "WebSite\StreamingPlatform.WebSite.csproj", "{E9F5A452-9735-48B5-9A34-2A3F59E3B81E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamingPlatform.WebSite", "WebSite\StreamingPlatform.WebSite.csproj", "{E9F5A452-9735-48B5-9A34-2A3F59E3B81E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamingPlatform.WebSite.Contract", "WebSite.Contract\StreamingPlatform.WebSite.Contract.csproj", "{9EE45EC5-992E-4430-AD88-5F193B64A85D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamingPlatform.WebSite.Contract", "WebSite.Contract\StreamingPlatform.WebSite.Contract.csproj", "{9EE45EC5-992E-4430-AD88-5F193B64A85D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamingPlatform.Domain", "Domain\StreamingPlatform.Domain.csproj", "{B01EFDC5-9E68-4E65-8FC2-A97CF89AFDB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamingPlatform.Domain", "Domain\StreamingPlatform.Domain.csproj", "{B01EFDC5-9E68-4E65-8FC2-A97CF89AFDB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamingPlatform.Domain.Contract", "Domain.Contract\StreamingPlatform.Domain.Contract.csproj", "{2892F803-97B1-437B-A029-A6312383A246}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamingPlatform.Domain.Contract", "Domain.Contract\StreamingPlatform.Domain.Contract.csproj", "{2892F803-97B1-437B-A029-A6312383A246}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamingPlatform.Domain.xUnitTest", "StreamingPlatform.xUnitTest\StreamingPlatform.Domain.xUnitTest.csproj", "{BEBCABB3-17FA-4492-AD46-7C04D332ADD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamingPlatform.Domain.xUnitTest", "StreamingPlatform.xUnitTest\StreamingPlatform.Domain.xUnitTest.csproj", "{BEBCABB3-17FA-4492-AD46-7C04D332ADD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamingPlatform.WebSite.xUnitTest", "StreamingPlatform.WebSite.xUnitTest\StreamingPlatform.WebSite.xUnitTest.csproj", "{567ED5C2-8E1B-448F-A2EF-D270562FE271}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamingPlatform.WebSite.xUnitTest", "StreamingPlatform.WebSite.xUnitTest\StreamingPlatform.WebSite.xUnitTest.csproj", "{567ED5C2-8E1B-448F-A2EF-D270562FE271}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamingPlatform.Framework", "StreamingPlatform.Framework\StreamingPlatform.Framework.csproj", "{2E4F8F6A-8FDF-42D8-9F85-74BB87B23D3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{567ED5C2-8E1B-448F-A2EF-D270562FE271}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{567ED5C2-8E1B-448F-A2EF-D270562FE271}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{567ED5C2-8E1B-448F-A2EF-D270562FE271}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E4F8F6A-8FDF-42D8-9F85-74BB87B23D3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E4F8F6A-8FDF-42D8-9F85-74BB87B23D3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E4F8F6A-8FDF-42D8-9F85-74BB87B23D3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E4F8F6A-8FDF-42D8-9F85-74BB87B23D3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace StreamingPlatform.Domain.Contract
 {
-    /// <summary>
-    /// 會員註冊
-    /// </summary>
-    public class RegisterMemberDto
+    public class MemberLoginDto
     {
         /// <summary>
         /// 帳號
@@ -20,13 +17,5 @@ namespace StreamingPlatform.Domain.Contract
         /// 密碼
         /// </summary>
         public string Pwd { get; set; }
-
-        public string Email { get; set; }
-
-        public string Name { get; set; }
-
-        public string DisplayName { get; set; }
-
-        public bool GoogleOta { get; set; }
     }
 }

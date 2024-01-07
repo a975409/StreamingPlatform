@@ -3,13 +3,12 @@
 using System;
 using System.Collections.Generic;
 
-namespace StreamingPlatform.Domain.Models;
-
-public partial class Song
+namespace StreamingPlatform.Domain.Models
 {
-    public int Id { get; set; }
-
-    public string Name { get; set; }
-
-    public string Note { get; set; }
+    public partial class Song
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Note { get; set; }
+    }
 }

@@ -3,15 +3,14 @@
 using System;
 using System.Collections.Generic;
 
-namespace StreamingPlatform.Domain.Models;
-
-public partial class PlaylistItem
+namespace StreamingPlatform.Domain.Models
 {
-    public int Id { get; set; }
+    public partial class PlaylistItem
+    {
+        public int Id { get; set; }
+        public int PlaylistId { get; set; }
+        public int SongId { get; set; }
 
-    public int PlaylistId { get; set; }
-
-    public int SongId { get; set; }
-
-    public virtual PlayList Playlist { get; set; }
+        public virtual PlayList Playlist { get; set; }
+    }
 }

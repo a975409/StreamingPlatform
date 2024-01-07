@@ -3,17 +3,20 @@
 using System;
 using System.Collections.Generic;
 
-namespace StreamingPlatform.Domain.Models;
-
-public partial class PlayList
+namespace StreamingPlatform.Domain.Models
 {
-    public int Id { get; set; }
+    public partial class PlayList
+    {
+        public PlayList()
+        {
+            PlaylistItem = new HashSet<PlaylistItem>();
+        }
 
-    public int MemberId { get; set; }
+        public int Id { get; set; }
+        public int MemberId { get; set; }
+        public string Name { get; set; }
 
-    public string Name { get; set; }
-
-    public virtual Member Member { get; set; }
-
-    public virtual ICollection<PlaylistItem> PlaylistItem { get; set; } = new List<PlaylistItem>();
+        public virtual Member Member { get; set; }
+        public virtual ICollection<PlaylistItem> PlaylistItem { get; set; }
+    }
 }
