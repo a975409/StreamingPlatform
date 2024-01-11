@@ -120,48 +120,42 @@ namespace StreamingPlatform.xUnitTest.Fakes
             {
                 SingerId = 1,
                 SingerName = "amazarashi",
-                SongId = 1,
-                Id = 1
+                SongId = 1
             });
 
             _context.SingerAndSongRelation.Add(new SingerAndSongRelation
             {
                 SingerId = 1,
                 SingerName = "amazarashi",
-                SongId = 2,
-                Id = 2
+                SongId = 2
             });
 
             _context.SingerAndSongRelation.Add(new SingerAndSongRelation
             {
                 SingerId = 1,
                 SingerName = "amazarashi",
-                SongId = 3,
-                Id = 3
+                SongId = 3
             });
 
             _context.SongAndAlbumRelation.Add(new SongAndAlbumRelation
             {
                 AlbumId = 1,
                 AlbumName = "eternal city",
-                SongId = 1,
-                Id = 1
+                SongId = 1
             });
 
             _context.SongAndAlbumRelation.Add(new SongAndAlbumRelation
             {
                 AlbumId = 1,
                 AlbumName = "eternal city",
-                SongId = 2,
-                Id = 2
+                SongId = 2
             });
 
             _context.SongAndAlbumRelation.Add(new SongAndAlbumRelation
             {
                 AlbumId = 1,
                 AlbumName = "eternal city",
-                SongId = 3,
-                Id = 3
+                SongId = 3
             });
 
             return this;

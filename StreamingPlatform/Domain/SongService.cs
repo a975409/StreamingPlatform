@@ -65,12 +65,12 @@ namespace StreamingPlatform.Domain
                         Id = item.s.Id,
                         Name = item.s.Name,
                         AlbumSearchResults = new List<AlbumSearchDto> { new AlbumSearchDto {
-                     Id= item.a.AlbumId,
-                      Name=item.a.AlbumName
+                        Id= item.a.AlbumId,
+                        Name=item.a.AlbumName
                     } },
                         SingerSearchResults = new List<SingerSearchDto> { new SingerSearchDto {
-                      Name=item.p.SingerName,
-                       Id=item.p.SingerId
+                        Name=item.p.SingerName,
+                        Id=item.p.SingerId
                      } }
                     });
                 }
@@ -79,13 +79,13 @@ namespace StreamingPlatform.Domain
             return songSearchResults;
         }
 
+        /// <summary>
+        /// 上傳歌曲
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public void SongUpload(SongUploadDto dto)
         {
-            var singerResult = _context.Singer.AsNoTracking().FirstOrDefault(m => m.Id == dto.SingerId);
-
-            if (singerResult == null)
-                throw new ArgumentNullException(nameof(dto.SingerId), "此歌手不存在");
-
             if (string.IsNullOrEmpty(dto.Name))
                 throw new ArgumentNullException(nameof(dto.Name),"必須填寫歌曲名稱");
 
@@ -96,24 +96,9 @@ namespace StreamingPlatform.Domain
 
             _context.Song.Add(newSong);
 
-            Album? album = null;
+            var singerResult = _context.Singer.AsNoTracking().Where(m => dto.SingerIds.Contains(m.Id)).ToList();
 
-            if (dto.albumId != null)
-            {
-                album = _context.Album.AsNoTracking().FirstOrDefault(m => m.Id == dto.albumId);
-
-                if (album == null)
-                    throw new ArgumentOutOfRangeException(nameof(dto.albumId), "指定的專輯不存在");
-            }
-            else if(dto.albumId == null && !string.IsNullOrEmpty(dto.AlbumName))
-            {
-                album = new Album
-                {
-                    Name = dto.AlbumName
-                };
-
-                _context.Album.Add(album);
-            }
+            var albumResult = _context.Album.AsNoTracking().Where(m => dto.AlbumIds.Contains(m.Id)).ToList();
 
             using (var trna = _context.Database.BeginTransaction())
             {
@@ -121,22 +106,31 @@ namespace StreamingPlatform.Domain
                 {
                     _context.SaveChanges();
 
-                    if (album != null)
+                    if (albumResult != null && albumResult.Any())
                     {
-                        _context.SongAndAlbumRelation.Add(new SongAndAlbumRelation
+                        foreach(var album in albumResult)
                         {
-                            AlbumId = album.Id,
-                            SongId = newSong.Id,
-                            AlbumName = album.Name
-                        });
+                            _context.SongAndAlbumRelation.Add(new SongAndAlbumRelation
+                            {
+                                AlbumId = album.Id,
+                                SongId = newSong.Id,
+                                AlbumName = album.Name
+                            });
+                        }
                     }
 
-                    _context.SingerAndSongRelation.Add(new SingerAndSongRelation
+                    if (singerResult != null && singerResult.Any())
                     {
-                        SingerId = singerResult.Id,
-                        SongId = newSong.Id,
-                        SingerName = singerResult.DisplayName
-                    });
+                        foreach (var singer in singerResult)
+                        {
+                            _context.SingerAndSongRelation.Add(new SingerAndSongRelation
+                            {
+                                SingerId = singer.Id,
+                                SongId = newSong.Id,
+                                SingerName = singer.DisplayName
+                            });
+                        }
+                    }
 
                     _context.SaveChanges();
                 }
@@ -148,6 +142,10 @@ namespace StreamingPlatform.Domain
             }
         }
 
+        /// <summary>
+        /// 刪除歌曲
+        /// </summary>
+        /// <param name="songId"></param>
         public void SongRemove(int songId)
         {
             var songReuslt = _context.Song.FirstOrDefault(m => m.Id == songId);
@@ -164,6 +162,36 @@ namespace StreamingPlatform.Domain
 
             if (singerAndSongRelationList.Any())
                 _context.SingerAndSongRelation.RemoveRange(singerAndSongRelationList);
+
+            _context.SaveChanges();
+        }
+
+        /// <summary>
+        /// 編輯歌曲
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public void SongEdit(SongEditDto dto)
+        {
+            if (string.IsNullOrEmpty(dto.Name))
+                throw new ArgumentNullException(nameof(dto.Name), "必須填寫歌曲名稱");
+
+            var songReuslt = _context.Song.FirstOrDefault(m => m.Id == dto.Id);
+
+            if (songReuslt == null)
+                throw new ArgumentNullException(nameof(dto.Id), "找不到歌曲");
+
+            songReuslt.Note = dto.Note;
+            songReuslt.Name = dto.Name;
+
+            var songAndAlbumRelation = _context.SongAndAlbumRelation.Where(m => m.SongId == dto.Id).ToList();
+            var singerAndSongRelation = _context.SingerAndSongRelation.Where(m => m.SongId == dto.Id).ToList();
+
+            if (songAndAlbumRelation != null && songAndAlbumRelation.Any())
+                _context.SongAndAlbumRelation.RemoveRange(songAndAlbumRelation);
+
+            if (singerAndSongRelation != null && singerAndSongRelation.Any())
+                _context.SingerAndSongRelation.RemoveRange(singerAndSongRelation);
 
             _context.SaveChanges();
         }

@@ -7,7 +7,6 @@ namespace StreamingPlatform.Domain.Models
 {
     public partial class SingerAndSongRelation
     {
-        public int Id { get; set; }
         public int SongId { get; set; }
         public int SingerId { get; set; }
         public string SingerName { get; set; }

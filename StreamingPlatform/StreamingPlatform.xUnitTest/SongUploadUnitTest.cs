@@ -21,7 +21,9 @@ namespace StreamingPlatform.Domain.xUnitTest
                                                                 .WithRelation()
                                                                 .WithMember()
                                                                 .Build();
-
+        /// <summary>
+        /// 歌曲名稱必填
+        /// </summary>
         [Fact]
         public void SongUpload_SongNameIsEmpty_ReturnArgumentNullException()
         {
@@ -29,31 +31,53 @@ namespace StreamingPlatform.Domain.xUnitTest
 
             var dto = new SongUploadDto
             {
-                albumId = 5,
-                AlbumName = "spiral",
                 Name = "",
                 Note = "",
-                SingerId = 1
+                AlbumIds = new List<int> { 1 },
+                SingerIds = new List<int> { 1, }
             };
 
             Assert.Throws<ArgumentNullException>(nameof(dto.Name), () => service.SongUpload(dto));
         }
 
+        /// <summary>
+        /// 編輯歌曲 - 找不到歌曲
+        /// </summary>
         [Fact]
-        public void SongUpload_SingerNotFound_ReturnArgumentNullException()
+        public void SongEdit_SongNotFound_ReturnArgumentNullException()
         {
             var service = new SongService(_context);
 
-            var dto = new SongUploadDto
+            var dto = new SongEditDto
             {
-                albumId = 5,
-                AlbumName = "spiral",
-                Name = "spiral",
+                Id = 10,
+                Name = "estsgd",
                 Note = "",
-                SingerId = -1
+                AlbumIds = new List<int> { 1 },
+                SingerIds = new List<int> { 1, }
             };
 
-            Assert.Throws<ArgumentNullException>(nameof(dto.SingerId), () => service.SongUpload(dto));
+            Assert.Throws<ArgumentNullException>(nameof(dto.Id), () => service.SongEdit(dto));
+        }
+
+        /// <summary>
+        /// 編輯歌曲 - 歌曲名稱為空
+        /// </summary>
+        [Fact]
+        public void SongEdit_SongNameIsEmpty_ReturnArgumentNullException()
+        {
+            var service = new SongService(_context);
+
+            var dto = new SongEditDto
+            {
+                Id = 1,
+                Name = "",
+                Note = "",
+                AlbumIds = new List<int> { 1 },
+                SingerIds = new List<int> { 1, }
+            };
+
+            Assert.Throws<ArgumentNullException>(nameof(dto.Name), () => service.SongEdit(dto));
         }
     }
 }

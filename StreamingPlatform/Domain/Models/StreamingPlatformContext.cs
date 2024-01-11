@@ -166,7 +166,7 @@ namespace StreamingPlatform.Domain.Models
 
             modelBuilder.Entity<SingerAndSongRelation>(entity =>
             {
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.HasNoKey();
 
                 entity.Property(e => e.SingerId).HasColumnName("singerId");
 
@@ -194,9 +194,7 @@ namespace StreamingPlatform.Domain.Models
 
             modelBuilder.Entity<SongAndAlbumRelation>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.HasNoKey();
 
                 entity.Property(e => e.AlbumId).HasColumnName("albumId");
 
