@@ -166,7 +166,14 @@ namespace StreamingPlatform.Domain.Models
 
             modelBuilder.Entity<SingerAndSongRelation>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.Id)
+                    .IsClustered(false);
+
+                entity.HasIndex(e => new { e.SongId, e.SingerId }, "IX_SingerAndSongRelation")
+                    .IsUnique()
+                    .IsClustered();
+
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.SingerId).HasColumnName("singerId");
 
@@ -194,7 +201,14 @@ namespace StreamingPlatform.Domain.Models
 
             modelBuilder.Entity<SongAndAlbumRelation>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.Id)
+                    .IsClustered(false);
+
+                entity.HasIndex(e => new { e.SongId, e.AlbumId }, "IX_SongAndAlbumRelation")
+                    .IsUnique()
+                    .IsClustered();
+
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.AlbumId).HasColumnName("albumId");
 
@@ -203,9 +217,7 @@ namespace StreamingPlatform.Domain.Models
                     .HasMaxLength(50)
                     .HasColumnName("albumName");
 
-                entity.Property(e => e.SongId)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("songId");
+                entity.Property(e => e.SongId).HasColumnName("songId");
             });
 
             OnModelCreatingPartial(modelBuilder);

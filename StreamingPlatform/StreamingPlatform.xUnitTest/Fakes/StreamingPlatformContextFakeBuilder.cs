@@ -118,6 +118,7 @@ namespace StreamingPlatform.xUnitTest.Fakes
         {
             _context.SingerAndSongRelation.Add(new SingerAndSongRelation
             {
+                 Id=1,
                 SingerId = 1,
                 SingerName = "amazarashi",
                 SongId = 1
@@ -125,6 +126,7 @@ namespace StreamingPlatform.xUnitTest.Fakes
 
             _context.SingerAndSongRelation.Add(new SingerAndSongRelation
             {
+                Id = 2,
                 SingerId = 1,
                 SingerName = "amazarashi",
                 SongId = 2
@@ -132,6 +134,7 @@ namespace StreamingPlatform.xUnitTest.Fakes
 
             _context.SingerAndSongRelation.Add(new SingerAndSongRelation
             {
+                Id = 3,
                 SingerId = 1,
                 SingerName = "amazarashi",
                 SongId = 3
@@ -139,6 +142,7 @@ namespace StreamingPlatform.xUnitTest.Fakes
 
             _context.SongAndAlbumRelation.Add(new SongAndAlbumRelation
             {
+                Id = 1,
                 AlbumId = 1,
                 AlbumName = "eternal city",
                 SongId = 1
@@ -146,6 +150,7 @@ namespace StreamingPlatform.xUnitTest.Fakes
 
             _context.SongAndAlbumRelation.Add(new SongAndAlbumRelation
             {
+                Id = 2,
                 AlbumId = 1,
                 AlbumName = "eternal city",
                 SongId = 2
@@ -153,6 +158,7 @@ namespace StreamingPlatform.xUnitTest.Fakes
 
             _context.SongAndAlbumRelation.Add(new SongAndAlbumRelation
             {
+                Id = 3,
                 AlbumId = 1,
                 AlbumName = "eternal city",
                 SongId = 3

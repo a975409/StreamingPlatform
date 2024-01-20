@@ -1,0 +1,146 @@
+﻿* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    color: white;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+body {
+    background-color: black;
+}
+
+ul li {
+    text-align: center;
+}
+
+    ul li a {
+        display: inline-block;
+        width: 100%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+        ul li a:hover {
+            background-color: aliceblue;
+            color: black;
+        }
+
+a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+    a:hover {
+        background-color: aliceblue;
+        color: black;
+        transition: all 0.25s;
+    }
+
+button {
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+}
+
+    button:hover {
+        cursor: pointer;
+        background-color: whitesmoke;
+        color: black;
+        transition: all 0.25s;
+    }
+
+    button[type="submit"] {
+        padding: 0.75rem 1rem;
+    }
+
+    button#menubar {
+        padding: 0.5rem 1.5rem;
+        font-size: 20px;
+    }
+
+input[type="text"] {
+    background-color: rgb(41, 41, 41);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    display: inline-block;
+    height: 40px;
+    width: 300px;
+    margin-right: 10px;
+    padding: 0 10px 0 30px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+    header > article {
+        display: flex;
+        align-items: center;
+    }
+
+form.searchForm {
+    display: flex;
+    align-items: center;
+}
+
+    form.searchForm i.fa-magnifying-glass {
+        position: absolute;
+    }
+
+    form.searchForm i.songNameSearchIcon {
+        top: 28px;
+        left: 165px;
+    }
+
+    form.searchForm i.albumNameSearchIcon {
+        top: 28px;
+        left: 477px;
+    }
+
+main {
+    display: flex;
+    flex-direction: row;
+}
+
+article.left {
+    width: 10vw;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+article.right {
+    width: 90vw;
+    margin-top: 10px;
+}
+
+article.left header {
+    margin-bottom: 10px;
+}
+
+article.right header {
+    margin-bottom: 10px;
+}
+
+article.userProfile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 230px;
+    padding-right: 10px;
+}
+
+    article.userProfile a {
+        height: 54px;
+        line-height: 54px;
+        padding-left: 15px;
+        padding-right: 15px;
+        border-radius: 5px;
+    }
+
+button#showUserProfileMenu:hover {
+    background-color: transparent;
+}

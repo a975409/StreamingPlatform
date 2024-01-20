@@ -6,4 +6,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Domain.Contract\StreamingPlatform.Domain.Contract.csproj" />
+    <ProjectReference Include="..\Domain\StreamingPlatform.Domain.csproj" />
+    <ProjectReference Include="..\StreamingPlatform.Framework\StreamingPlatform.Framework.csproj" />
+    <ProjectReference Include="..\WebSite.Contract\StreamingPlatform.WebSite.Contract.csproj" />
+  </ItemGroup>
+
 </Project>
